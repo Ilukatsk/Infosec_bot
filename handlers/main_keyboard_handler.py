@@ -12,6 +12,7 @@ from aiogram.fsm.state import StatesGroup, State
 from aiogram.methods.send_message import SendMessage
 from aiogram.fsm.context import FSMContext
 router = Router()
+feedback_receive_id = #ДОБАВЬТЕ АЙДИ
 
 #------------------
 main_keyboard_logger = logging.getLogger(__name__)
@@ -83,8 +84,8 @@ async def Feedback2(message: types.Message, state: FSMContext):
     try:
         if (message.text != "Отмена"):
             await message.answer("Спасибо за ваш отзыв", reply_markup=main_keyboard())
-            await SendMessage(chat_id=187568211, text="Отзыв о работе бота от пользователя @{}:".format(message.from_user.username))
-            await SendMessage(chat_id=187568211, text=message.text)
+            await SendMessage(chat_id=feedback_receive_id, text="Отзыв о работе бота от пользователя @{}:".format(message.from_user.username))
+            await SendMessage(chat_id=feedback_receive_id, text=message.text)
             await state.clear()
             main_keyboard_logger.info("Received feedback from the user {}".format(message.from_user.id))
         else:
